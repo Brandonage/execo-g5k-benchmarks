@@ -6,4 +6,4 @@ def get_npoints_for_size(app,size):
                    "relational":0.124,"graph":1.9}
     refsize = refsizedict[app]
     npoints = (size*refpoints)/refsize
-    return int(npoints)
+    return str(int(npoints))
