@@ -34,10 +34,12 @@ class SparkSubmitterYarn(SparkSubmitter):
         :param submit_conf: a list of tuples with the form [["spark.executor.memory","2g"],["spark.executor.cores","1"]]
         :param scheduler_options: options that are only applicable to that resource manager e.g. (Mesos tags, yarn labels...)
         """
-        scheduler_str = self.generate_scheduler_options(scheduler_options)
-        conf_str = self.generate_conf(submit_conf)
         if master is None:
             master = self.default_master
+        if scheduler_options is None:
+            scheduler_options = ""
+        scheduler_str = self.generate_scheduler_options(scheduler_options)
+        conf_str = self.generate_conf(submit_conf)
         cmd = "{0} --class {1} --master {2} --deploy-mode client {3} {4} {5} {6}".format(
             self.root_to_spark_submit,
             class_in_jar,
@@ -47,8 +49,7 @@ class SparkSubmitterYarn(SparkSubmitter):
             " ".join(class_params),
             scheduler_str
         )
-        print cmd
-        #Remote(cmd, hosts=self.master_node, connection_params={'user':g5k_configuration.get('g5k_user')}
-        #       , process_args={'stdout_handlers': [sys.stdout], 'stderr_handlers': [sys.stderr]} ).run()
+        Remote(cmd, hosts=self.master_node, connection_params={'user':g5k_configuration.get('g5k_user')}
+               , process_args={'stdout_handlers': [sys.stdout], 'stderr_handlers': [sys.stderr]} ).run()
 
 

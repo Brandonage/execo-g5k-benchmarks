@@ -20,7 +20,7 @@ def get_default_settings(app_name):
         'linearregression' : {'output':'LinearRegressionOutput','max_iterations':'5'},
         'logisticregression' : {'output':'LogisticOutput','max_iterations':'5','storage_level':'MEMORY_AND_DISK'},
         'stronglyconnected' : {'output':'ConnectedComponentOutput','npartitions':'0'},
-        'groupby' : {'num_kvpairs':'15600000','value_size':'10000','npartitions':'168'},
+        'groupby' : {'num_kvpairs':'15600000','value_size':'10000','nmappers':'168'},
         'rddrelational' : {'output':"RDDOutput.txt"},
         'ngrams' : {'output':"NgramsOutput.txt"},
         'generatetext' : {'output':'words.txt','npoints':'10000','npartitions':'30'},
