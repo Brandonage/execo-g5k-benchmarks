@@ -14,7 +14,7 @@ def get_default_settings(app_name):
         'grep' : {'keyword':'pneumonalgia','output': "grepOutput.txt",'npartitions':"0"},
         'wordcount' : {'output':"WordCountOutput.txt",'npartitions':"0"},
         'sort' : {'output':"SortOutput.txt",'npartitions':"0"},
-        'connnectedcomponent' : {'output':'ConnectedComponentOutput','npartitions':'0','useless':'0'},
+        'connectedcomponent' : {'output':'ConnectedComponentOutput','npartitions':'0','useless':'0'},
         'svm' : {'niterations':'3','npartitions':'0'},
         'kmeans' : {'output':'kMeansBenchOutput','nclusters':'10','max_iterations':'4','num_run':'1'},
         'linearregression' : {'output':'LinearRegressionOutput','max_iterations':'5'},

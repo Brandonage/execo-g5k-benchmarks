@@ -50,7 +50,7 @@ class SparkBench:
         if ndimensions is None:
             nclusters = default_settings.get('ndimensions')
         if scaling is None:
-            nclusters = default_settings.get('scaling')
+            scaling = default_settings.get('scaling')
         class_params = [output,npoints,nclusters,ndimensions,scaling,str(npartitions)]
         jar_directory = self.home_directory + "KMeans/target/KMeansApp-1.0.jar"
         self.submitter.submit(class_in_jar="kmeans_min.src.main.scala.KmeansDataGen",class_params=class_params,
@@ -131,7 +131,7 @@ class SparkBench:
     def launchgeneraterddrelationalfile(self,output,size,npartitions,submit_conf,
                                  scheduler_options=None,master=None):
         npoints = get_npoints_for_size('relational',size)
-        class_params = [output,npoints,str(npartitions)]
+        class_params = [npoints,output,str(npartitions)]
         jar_directory = self.home_directory + "BenchMark-1.0-SNAPSHOT.jar"
         self.submitter.submit(class_in_jar="com.abrandon.upm.GenerateRDDRelation",class_params=class_params,
                               jar=jar_directory, master=master,submit_conf=submit_conf,scheduler_options=scheduler_options)
@@ -224,7 +224,7 @@ class SparkBench:
         if value_size is None:
             value_size = default_settings.get('value_size')
         if nmappers is None:
-            nmappers = default_settings.get('npartitions')
+            nmappers = default_settings.get('nmappers')
         class_params = [num_kvpairs,value_size,nmappers]
         jar_directory = self.home_directory + "BenchMark-1.0-SNAPSHOT.jar"
         self.submitter.submit(class_in_jar="com.abrandon.upm.GroupByTest",class_params=class_params,
@@ -437,7 +437,7 @@ class SparkBench:
         self.launchgeneratelinearregfile(output="linear" + prefix,size=size,npartitions=npartitions,submit_conf=conf)
         self.launchgeneratelogisticregfile(output="logistic" + prefix,size=size,npartitions=npartitions,submit_conf=conf)
         self.launchgeneratepcafile(output="pca" + prefix,size=size,npartitions=npartitions,submit_conf=conf)
-        self.launchgeneraterddrealg5k_lationalfile(output="rdd" + prefix,size=size,npartitions=npartitions,submit_conf=conf)
+        self.launchgeneraterddrelationalfile(output="rdd" + prefix,size=size,npartitions=npartitions,submit_conf=conf)
         self.launchgeneratesvmfile(output="svm" + prefix,size=size,npartitions=npartitions,submit_conf=conf)
         self.launchgeneratetextfile(output="words" + prefix,size=size,npartitions=npartitions,submit_conf=conf)
 
