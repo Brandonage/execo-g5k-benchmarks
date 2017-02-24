@@ -48,7 +48,7 @@ class SparkBench:
         if nclusters is None:
             nclusters = default_settings.get('nclusters')
         if ndimensions is None:
-            nclusters = default_settings.get('ndimensions')
+            ndimensions = default_settings.get('ndimensions')
         if scaling is None:
             scaling = default_settings.get('scaling')
         class_params = [output,npoints,nclusters,ndimensions,scaling,str(npartitions)]
