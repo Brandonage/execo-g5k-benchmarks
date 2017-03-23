@@ -5,7 +5,8 @@ To make it work we need to add in the in the .execo.conf.py file of our home dir
 be merged with the default execo.config.g5k_configuration
 
 g5k_configuration = {
-    'g5k_user' : 'abrandon'
+    'g5k_user' : 'abrandon',
+    'oar_job_key_file': '/home/abrandon/.ssh/id_rsa',
 }
 
 After that we can use it in our experiments like in https://github.com/Brandonage/execo-utilities-g5k examples
