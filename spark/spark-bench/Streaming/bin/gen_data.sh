@@ -21,7 +21,10 @@ JAR="${SPARK_HOME}/examples/target/scala-2.10/spark-examples-${SPARK_VERSION}-ha
 #OPTION="minli1 9999"
 
 
-#opt=$subApp
+opt=$1
+if [ ! -z "$opt" ]; then
+  subApp=$opt
+fi
 
 # NetworkWordCount StatefulNetworkWordCount CustomReceiver QueueStream RawNetworkGrep ActorWordCount
 # PageViewStream MQTTWordCount ZeroMQWordCount TwitterAlgebirdCMS TwitterAlgebirdHLL TwitterPopularTags
@@ -102,7 +105,7 @@ elif [ $subApp = "PageViewStream" ];then
 	#CLASS="org.apache.spark.examples.streaming.clickstream.PageViewGenerator"
 	CLASS="src.main.scala.PageViewGenerator"
 	OPTION=" 44444 ${optApp}"
-	JAR="${DIR}/target/scala-2.10/streamingapp_2.10-1.0.jar"
+	JAR="${DIR}/target/StreamingApp-1.0.jar"
 elif [ $subApp = "MQTTWordCount" ];then
 	#subapp=MQTTWordCount
 	#OPTION="tcp://minli1:1883 foo"

@@ -60,7 +60,7 @@ public class KmeansAppJava {
     double loadTime = (double) (System.currentTimeMillis() - start) / 1000.0;
 
     start = System.currentTimeMillis();
-    final KMeansModel clusters = KMeans.train(parsedData.rdd(), K, maxIterations, runs, KMeans.K_MEANS_PARALLEL(), 127L);
+    KMeansModel clusters = KMeans.train(parsedData.rdd(), K, maxIterations, runs, KMeans.K_MEANS_PARALLEL(), 127L);
     double trainingTime = (double) (System.currentTimeMillis() - start) / 1000.0;
 
     // Evaluate clustering by computing Within Set Sum of Squared Errors

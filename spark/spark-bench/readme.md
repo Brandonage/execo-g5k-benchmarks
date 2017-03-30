@@ -15,7 +15,7 @@
 
 **What's Benchmark Suite for Apache Spark ?**
 
-Spark-Bench is a benchmarking suite spacific for Apache Spark.
+Spark-Bench is a benchmarking suite specific for Apache Spark.
 It comprises a representative and comprehensive set of workloads belonging to four different application types that currently supported by Apache Spark, including machine learning, graph processing, streaming and SQL queries.
 
 The chosen workloads exhibit different workload characteristics and exercise different system bottlenecks; currently we cover CPU, memory, and shuffle and IO intensive workloads.
@@ -62,7 +62,7 @@ Usecase 4. It allows in-depth study of performance implication of Apache Spark s
 
 **Supported Apache Spark releases:**
  
-  - Spark 1.2, 1.3, 1.4, 1.5 and 1.6
+  - Spark 2.0.1, this code is branched for release 2.0.1, note that these versions need a later version of scala and as such there are changes to pom files. 
  
 ---
 ### Getting Started ###
@@ -118,8 +118,15 @@ Usecase 4. It allows in-depth study of performance implication of Apache Spark s
 	
 	**Note for streaming applications**
 	For Streaming applications such as TwitterTag,StreamingLogisticRegression
-	First, execute `<SPARK_BENCH_HOME>/SQL/bin/gen_data.sh` in one terminal;
-	Second, execute `<SPARK_BENCH_HOME>/SQL/bin/run.sh` in another terminal;
+	First, execute `<SPARK_BENCH_HOME>/Streaming/bin/gen_data.sh` in one terminal;
+	Second, execute `<SPARK_BENCH_HOME>/Streaming/bin/run.sh` in another terminal;
+
+        In order run a particular streaming app (default: PageViewStream):
+            You need to pass a subApp parameter to the gen_data.sh or run.sh like this:
+                  <SPARK_BENCH_HOME>/Streaming/bin/run.sh TwitterPopularTags
+            *Note: some subApps do not need the data_gen step. In those you will get a "no need" string in the output.
+
+        You can make a certain subApp default by changing Streaming/conf/env.sh and changing the subApp= line with your choice of the streaming application.
 	
     In addition, StreamingLogisticRegression requires the `gen_data.sh` and `run.sh` scripts which
 	launches Apache Spark applications can run simultaneously.

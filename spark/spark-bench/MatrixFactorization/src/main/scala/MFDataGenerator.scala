@@ -18,14 +18,15 @@
 
 package src.main.scala;
 
-import org.apache.log4j.{Level, Logger}
-import org.apache.spark.rdd.RDD
-import org.apache.spark.storage.StorageLevel
-import org.apache.spark.{SparkConf, SparkContext}
-import org.jblas.DoubleMatrix
-
+import org.apache.log4j.Logger
+import org.apache.log4j.Level
 import scala.language.postfixOps
 import scala.util.Random
+import org.jblas.DoubleMatrix
+import org.apache.spark.storage.StorageLevel
+import org.apache.spark.{ SparkContext, SparkConf}
+import org.apache.spark.rdd.RDD
+import java.io._
 
 /**
 
