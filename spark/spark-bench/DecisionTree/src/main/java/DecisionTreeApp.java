@@ -102,6 +102,7 @@ public class DecisionTreeApp {
                         return !pl._1().equals(pl._2());
                     }
                 }).count() / data.count();
+            predictionAndLabel.saveAsTextFile(output);
             double testTime = (double)(System.currentTimeMillis() - start) / 1000.0;
                 
                 System.out.printf("{\"loadTime\":%.3f,\"trainingTime\":%.3f,\"testTime\":%.3f}\n", loadTime, trainingTime, testTime);
