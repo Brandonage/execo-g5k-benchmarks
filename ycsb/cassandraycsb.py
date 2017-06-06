@@ -1,5 +1,5 @@
 from ycsb import YCSB
-from execo import Remote, SshProcess
+from execo import Remote
 import sys
 
 
@@ -14,7 +14,7 @@ class CassandraYCSB(YCSB):
         YCSB.__init__(self, install_nodes, execo_conn_params)
         self.cassandra_nodes = cassandra_nodes
 
-    def load_workload(self, from_node, workload, recordcount, threadcount=1):
+    def load_workload(self, from_node, workload, recordcount, threadcount="1"):
         """
         Run a workload from the core workloads with the CassandraDB db wrapper
         :param from_node: from which node you want to run the workload. This is a set variable
@@ -33,14 +33,11 @@ class CassandraYCSB(YCSB):
         insertstart_values = map(lambda x: x * insertcount, insertstart_steps)
         # We load the data into the cassandra database
         # This could be change to an execo generator expression like insertstart={{[x for x in insertstart_values]}}
-        for start_value in insertstart_values:
-            SshProcess(
-                "ycsb-0.12.0/bin/ycsb.sh load cassandra-cql -P ycsb-0.12.0/workloads/{0} -p hosts={1} -p recordcount={2} -p insertstart={3} -p insertcount={4} -p threadcount={5}"
-                .format(workload, cassandra_nodes_str, recordcount, start_value, insertcount, threadcount),
-                host=from_node,
+        Remote(
+                "ycsb-0.12.0/bin/ycsb.sh load cassandra-cql -P ycsb-0.12.0/workloads/" + workload + " -p hosts=" + cassandra_nodes_str + " -p recordcount=" + recordcount + " -p insertstart={{[x for x in insertstart_values]}} -p insertcount=" + str(insertcount) + " -p threadcount=" + threadcount,
+                hosts=from_node,
                 connection_params=self.execo_conn_params,
-                stdout_handlers=[sys.stdout],
-                stderr_handlers = [sys.stderr]).run()
+                process_args={'stdout_handlers': [sys.stdout], 'stderr_handlers': [sys.stderr]}).run()
 
     def run_workload(self, iteration, res_dir, from_node, workload, threadcount=1):
         # we transform the set to a str with the format 'node1,node2,node3...'
