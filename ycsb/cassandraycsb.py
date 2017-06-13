@@ -51,7 +51,7 @@ class CassandraYCSB(YCSB):
         cassandra_nodes_str = ','.join(list(self.cassandra_nodes))
         # We run the workload
         Remote(
-            "ycsb-0.12.0/bin/ycsb.sh run cassandra-cql -P ycsb-0.12.0/workloads/" + workload + " -p hosts=" + cassandra_nodes_str + " -p recordcount=" + recordcount + " -p threadcount=" + str(threadcount) + " -p fieldlength=" + str(fieldlength) + " -p exportfile=" + res_dir + "/output_" + workload + "_{{{host}}}_it" + str(iteration) + " -target=" + str(target),
+            "ycsb-0.12.0/bin/ycsb.sh run cassandra-cql -P ycsb-0.12.0/workloads/" + workload + " -p hosts=" + cassandra_nodes_str + " -p recordcount=" + recordcount + " -p threadcount=" + str(threadcount) + " -p fieldlength=" + str(fieldlength) + " -p exportfile=" + res_dir + "/output_" + workload + "_{{{host}}}_it" + str(iteration) + " -target " + str(target),
             hosts=from_node,
             connection_params=self.execo_conn_params,
             process_args={'stdout_handlers': [sys.stdout], 'stderr_handlers': [sys.stderr]}).run()
