@@ -51,7 +51,8 @@ class YCSB:
         """
         raise NotImplementedError
 
-    def analyse_output(self,directory, workload, metric):
+    @staticmethod
+    def analyse_results(directory, workload, metric):
         """
         This function is going to analyse the output files from the execution of a YSCB benchmark for a given workload
         and extract a summary statistic from one metric. Returns a list with all the metrics for the different iterations
