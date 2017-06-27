@@ -1,6 +1,6 @@
 from execo import Remote
 from glob import glob
-from numpy import mean
+from numpy import mean, var
 import re
 from common.common_utils import check_if_file_exists
 
@@ -75,7 +75,8 @@ class YCSB:
                         throughput = float(result.group(2))
                         list_of_metrics.append(throughput)
         metrics_mean = mean(list_of_metrics)
-        return list_of_metrics, metrics_mean
+        metrics_var = var(list_of_metrics)
+        return list_of_metrics, metrics_mean, metrics_var
 
 if __name__ == '__main__':
     directory='/Users/alvarobrandon/execo_experiments/dcosvagrant__06_Jun_2017_14:42/no_fmone'
