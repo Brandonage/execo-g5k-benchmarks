@@ -10,7 +10,6 @@ from execo import Remote, Put
 
 
 # The object that represents the spark-bench benchmark of https://github.com/SparkTC/spark-bench.
-# TODO: Decouple the SparkBench and SparkSubmitter objects and pass it as a parameter launchX(submitter1,params...)
 # The only handicap of not doing this decoupling is that we will have to create a new Benchmark object
 # for each type of cluster we have e.g ( A YARN cluster, a Mesos Cluster, a standalone... ). This have
 # advantages tho since we can have different types of benchmark in our experiment without worrying about
